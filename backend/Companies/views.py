@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.shortcuts import render
 
 # Create your views here.
@@ -21,7 +22,11 @@ def add_new_compoany(request):
         company.tax_value = data.get('tax_value', 12)
         company.company_type = data.get('company_type')
         company.user = request.user
-        company.save()
+        try:
+            company.clean()
+            company.save()
+        except ValidationError as e:
+            return JsonResponse({'status': 'error', 'errors': e.message_dict})
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'})
 

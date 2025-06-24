@@ -23,6 +23,8 @@ class Company(models.Model):
 
         if not self.name:
             errors['name'] = 'Name is required'
+        elif Company.objects.filter(name=self.name).exclude(pk=self.pk).exists():
+            errors['name'] = 'Company with this name already exists'
         if self.tax_value < 0:
             errors['tax_value'] = 'Tax value cannot be negative'
         if self.company_type not in dict(self.BUSINESS_TYPE_CHOICES):
