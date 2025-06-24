@@ -26,9 +26,9 @@ def add_new_compoany(request):
             company.clean()
             company.save()
         except ValidationError as e:
-            return JsonResponse({'status': 'error', 'errors': e.message_dict})
+            return JsonResponse({'status': 'error', 'errors': e.message_dict}, status=400)
         return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'})
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
 
 @login_required
 def get_companies(request):
@@ -38,5 +38,28 @@ def get_companies(request):
             'status': 'success',
             'companies': list(companies.values('id', 'name', 'vat', 'tax_value', 'company_type'))
         })
-    return JsonResponse({'status': 'error'})
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
+
+@login_required
+def update_company(request, company_id):
+    if request.method == "POST":
+        try:
+            company = Company.objects.get(id=company_id, user=request.user)
+        except Company.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Company not found'}, status=404)
+
+        data = json.loads(request.body)
+        company.name = data.get('name', company.name)
+        company.vat = data.get('vat', company.vat)
+        company.tax_value = data.get('tax_value', company.tax_value)
+        company.company_type = data.get('company_type', company.company_type)
+
+        try:
+            company.clean()
+            company.save()
+            return JsonResponse({'status': 'success'})
+        except ValidationError as e:
+            return JsonResponse({'status': 'error', 'errors': e.message_dict}, status=400)
+
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
 
