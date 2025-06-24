@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -9,12 +11,16 @@ from django.http import HttpResponse, JsonResponse
 from Companies.models import Company
 
 
+@login_required
 def add_new_compoany(request):
     if request.method == "POST":
         company = Company()
-        company.name = request.POST['name']
-        company.vat = request.POST['vat']
-        company.tax_value = request.POST['tax_value']
+        data = json.loads(request.body)
+        company.name = data.get('name')
+        company.vat = data.get('vat')
+        company.tax_value = data.get('tax_value', 12)
+        company.company_type = data.get('company_type')
+        company.user = request.user
         company.save()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'})
