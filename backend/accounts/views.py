@@ -12,7 +12,7 @@ from django.views.decorators.http import require_POST
 
 
 # @csrf_exempt
-def login_post(request):
+def user_login(request):
     if request.method == "POST":
         data = json.loads(request.body)
         username = data.get('username')
@@ -26,13 +26,13 @@ def login_post(request):
 
 
 
-def logout_post(request):
+def user_logout(request):
     if request.method == "POST":
         logout(request)
         return JsonResponse({'status': 'ok'})
     return JsonResponse({'error': 'Invalid request'})
 
-def register_post(request):
+def user_register(request):
     if request.method == "POST":
         data = json.loads(request.body)
         username = data.get('username')
