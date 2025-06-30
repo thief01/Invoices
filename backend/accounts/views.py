@@ -1,6 +1,6 @@
 import json
 
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -35,17 +35,31 @@ def user_logout(request):
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def user_register(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
-        email = data.get('email')
 
-        if not username or not password or not email:
-            return JsonResponse({'error': 'Invalid request'}, status=400)
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({'error': 'Username already exists'}, status=409)
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()
-        return JsonResponse({'status': 'ok'})
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("index")
+        else:
+            messages.error(request, "Błąd rejestracji. Sprawdź poprawność danych.")
+    else:
+        form = UserCreationForm()
+    return render(request, 'accounts/register.html', {'form': form})
+
+
+    # if request.method == "POST":
+    #     data = json.loads(request.body)
+    #     username = data.get('username')
+    #     password = data.get('password')
+    #     email = data.get('email')
+    #
+    #     if not username or not password or not email:
+    #         return JsonResponse({'error': 'Invalid request'}, status=400)
+    #     if User.objects.filter(username=username).exists():
+    #         return JsonResponse({'error': 'Username already exists'}, status=409)
+    #     user = User.objects.create_user(username=username, email=email, password=password)
+    #     user.save()
+    #     return JsonResponse({'status': 'ok'})
+    # return JsonResponse({'error': 'Method not allowed'}, status=405)
