@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def fix_company_data(apps, schema_editor):
-    Company = apps.get_model('Companies', 'Company')
+    Company = apps.get_model('companies', 'Company')
     # Assuming the fix is to set a default tax_value for companies without it
     companies = Company.objects.all()
 
@@ -19,7 +19,7 @@ def fix_company_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Companies', '0008_auto_20250624_0910'),
+        ('companies', '0008_auto_20250624_0910'),
     ]
 
     operations = [

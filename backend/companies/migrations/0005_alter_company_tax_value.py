@@ -6,19 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Companies', '0003_alter_company_user'),
+        ('companies', '0004_company_tax_value_company_vat'),
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='company',
             name='tax_value',
             field=models.DecimalField(decimal_places=2, default=12, max_digits=10),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='company',
-            name='vat',
-            field=models.BooleanField(default=False),
         ),
     ]

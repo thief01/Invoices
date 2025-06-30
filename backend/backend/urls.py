@@ -22,6 +22,6 @@ from backend.views import get_csrf_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include('accounts.urls')),
-    path('companies/', include('Companies.urls')),
+    path('companies/', include('companies.urls')),
     path('csrf/', get_csrf_token, name='csrf'),
 ]

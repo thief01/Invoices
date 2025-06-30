@@ -3,7 +3,7 @@
 from django.db import migrations, models
 
 def fix_company_name_duplications(app, schema_editor):
-    Company = app.get_model("Companies", "Company")
+    Company = app.get_model("companies", "Company")
     seen = set()
 
     for company in Company.objects.all().order_by('id'):
@@ -21,7 +21,7 @@ def fix_company_name_duplications(app, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Companies', '0007_alter_company_name'),
+        ('companies', '0007_alter_company_name'),
     ]
 
     operations = [

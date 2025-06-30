@@ -9,7 +9,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse
 
-from Companies.models import Company
+from companies.models import Company
 
 
 @login_required
