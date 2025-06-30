@@ -11,7 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 
-# @csrf_exempt
 def user_login(request):
     if request.method == "POST":
         data = json.loads(request.body)
