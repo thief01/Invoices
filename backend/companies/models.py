@@ -14,6 +14,7 @@ class Company(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True)
+    tin = models.CharField(max_length=20, blank=True, null=True, verbose_name="Tax Identification Number")
     vat = models.BooleanField(default=False)
     tax_value = models.DecimalField(max_digits=10, decimal_places=2, default=12)
     company_type = models.CharField(max_length=3, choices=BUSINESS_TYPE_CHOICES, default='BA', verbose_name="Company Type")
@@ -29,6 +30,8 @@ class Company(models.Model):
             errors['tax_value'] = 'Tax value cannot be negative'
         if self.company_type not in dict(self.BUSINESS_TYPE_CHOICES):
             errors['company_type'] = 'Invalid company type'
+        if self.tin and not self.tin.isdigit():
+            errors['tin'] = 'Tax Identification Number must be numeric'
 
         if errors:
             raise ValidationError(errors)

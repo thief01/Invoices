@@ -11,9 +11,20 @@ from django.http import HttpResponse, JsonResponse
 
 from companies.models import Company
 
+@login_required
+def get_companies(request):
+    if request.method == "GET":
+        companies =  Company.objects.filter(user = request.user)
+        # return JsonResponse({
+        #     'status': 'success',
+        #     'companies': list(companies.values('id', 'name', 'vat', 'tax_value', 'company_type'))
+        # })
+        return render(request, 'companies/companies.html', {'companies': companies})
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
+
 
 @login_required
-def add_new_compoany(request):
+def add_new_company(request):
     if request.method == "POST":
         company = Company()
         data = json.loads(request.body)
@@ -30,15 +41,7 @@ def add_new_compoany(request):
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
-@login_required
-def get_companies(request):
-    if request.method == "GET":
-        companies =  Company.objects.filter(user = request.user)
-        return JsonResponse({
-            'status': 'success',
-            'companies': list(companies.values('id', 'name', 'vat', 'tax_value', 'company_type'))
-        })
-    return JsonResponse({'status': 'Method not allowed'}, status=405)
+
 
 @login_required
 def update_company(request, company_id):
@@ -63,3 +66,15 @@ def update_company(request, company_id):
 
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
+
+@login_required
+def delete_company(request):
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
+
+@login_required
+def company_detail(request, company_id):
+    return JsonResponse({'status': 'Method not allowed'}, status=405)
+
+@login_required
+def edit_company(request, company_id):
+    return JsonResponse({'status': 'Method not allowed'}, status=405)

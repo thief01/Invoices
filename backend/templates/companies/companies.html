@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twoje firmy</title>
+    {% load static %}
+    {#    <link rel="stylesheet" href="{% static '/css/index.css' %}">#}
+    <link rel="stylesheet" href="{% static '/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static '/css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static '/css/companies/companies-list.css' %}">
+</head>
+<body>
+<div>
+    <h1 style="text-align: center">Twoje firmy</h1>
+    <a href="{% url 'add_new_company' %}" class="btn btn-success">Dodaj nową firmę</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nazwa firmy</th>
+            <th>NIP</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for company in companies %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ company.name }}</td>
+                <td>{{ company.tin }}</td>
+                <td>
+                    <a href="{% url 'company_detail' company.id %}" class="btn btn-primary">Szczegóły</a>
+                    <a href="{% url 'edit_company' company.id %}" class="btn btn-primary">Edytuj</a>
+                    <form method="post" action="{% url 'delete_company' company.id %}" style="display: inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">Brak firm do wyświetlenia.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>

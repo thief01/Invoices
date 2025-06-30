@@ -47,19 +47,3 @@ def user_register(request):
     else:
         form = UserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
-
-
-    # if request.method == "POST":
-    #     data = json.loads(request.body)
-    #     username = data.get('username')
-    #     password = data.get('password')
-    #     email = data.get('email')
-    #
-    #     if not username or not password or not email:
-    #         return JsonResponse({'error': 'Invalid request'}, status=400)
-    #     if User.objects.filter(username=username).exists():
-    #         return JsonResponse({'error': 'Username already exists'}, status=409)
-    #     user = User.objects.create_user(username=username, email=email, password=password)
-    #     user.save()
-    #     return JsonResponse({'status': 'ok'})
-    # return JsonResponse({'error': 'Method not allowed'}, status=405)
