@@ -1,0 +1,27 @@
+:root {
+    --primary-bg-color: #667eea;
+    --primary-color: white;
+    --primary-bg-hover-color: #5a67d8;
+    --primary-hover-color: white;
+
+    --secondary-bg-color: #6c757d;
+    --secondary-color: white;
+    --secondary-bg-hover-color: #5a6268;
+    --secondary-hover-color: white;
+
+    --danger-bg-color: #dc3545;
+    --danger-color: white;
+    --danger-bg-hover-color: #c82333;
+    --danger-hover-color: white;
+
+    --success-bg-color: #28a745;
+    --success-color: white;
+    --success-bg-hover-color: #218838;
+    --success-hover-color: white;
+
+    --outline-bg-color: transparent;
+    --outline-border-style: 2px solid #667eea;
+    --outline-color: #667eea;
+    --outline-hover-bg-color: #667eea;
+    --outline-hover-color: white;
+}
