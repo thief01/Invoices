@@ -6,25 +6,26 @@
     <title>Strona główna</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/css/get-action-buttons.css' %}">
 </head>
 <body>
-    <div class="header">
+    <div class="box-view">
         {% if user.is_authenticated %}
             <h1>Witaj, {{ user.username }}!</h1>
             <p>Jesteś zalogowany jako: {{ user.first_name }} {{ user.last_name }}</p>
-            <a href="{% url 'get_companies' %}">Zobacz swoje firmy!</a>
-            <a href="{% url 'logout' %}">Wyloguj się</a>
+            <a href="{% url 'get_companies' %}" class="btn btn-primary">Zobacz swoje firmy!</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Wyloguj się</a>
         {% else %}
-            <h1>Witaj na naszej stronie!</h1>
+            <h1>Witaj na Faktorwnia.pl!</h1>
             <p>
-                <a href="{% url 'login' %}">Zaloguj się</a> |
-                <a href="{% url 'register' %}">Zarejestruj się</a>
+                <a href="{% url 'login' %}" class="btn btn-primary">Zaloguj się</a> |
+                <a href="{% url 'register' %}" class="btn btn-primary">Zarejestruj się</a>
             </p>
         {% endif %}
     </div>
 
     <div class="main-content">
-        <h2>Aplikacja Fakturownia.</h2>
+        <h2>Aplikacja Fakturownia.pl</h2>
         <p>Zarządzaj swoimi fakturami w prosty sposób!</p>
     </div>
 </body>
