@@ -24,4 +24,35 @@
     --outline-color: #667eea;
     --outline-hover-bg-color: #667eea;
     --outline-hover-color: white;
+
+    /* Nowe zmienne dla inputów */
+    --input-bg-color: white;
+    --input-color: #333;
+    --input-border-color: #ddd;
+    --input-border-width: 2px;
+    --input-border-radius: 5px;
+    --input-padding: 0.75rem 1rem;
+    --input-font-size: 1rem;
+
+    /* Input focus states */
+    --input-focus-border-color: var(--primary-bg-color);
+    --input-focus-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+
+    /* Input hover states */
+    --input-hover-border-color: #bbb;
+
+    /* Input error states */
+    --input-error-border-color: var(--danger-bg-color);
+    --input-error-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+
+    /* Label styles */
+    --label-color: #333;
+    --label-font-weight: 500;
+    --label-margin-bottom: 0.5rem;
+
+    /* Form group spacing */
+    --form-group-margin-bottom: 1.5rem;
+
+    /* Transitions */
+    --transition-speed: 0.3s;
 }

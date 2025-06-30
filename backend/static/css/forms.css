@@ -1,0 +1,119 @@
+/* static/css/forms.css */
+
+/* Form group container */
+.form-group {
+    margin-bottom: var(--form-group-margin-bottom);
+    text-align: left;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: var(--label-margin-bottom);
+    color: var(--label-color);
+    font-weight: var(--label-font-weight);
+    font-size: var(--input-font-size);
+}
+
+/* Input fields */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--input-padding);
+    background: var(--input-bg-color);
+    color: var(--input-color);
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--input-border-radius);
+    font-size: var(--input-font-size);
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all var(--transition-speed);
+}
+
+/* Input hover state */
+.form-group input[type="text"]:hover,
+.form-group input[type="email"]:hover,
+.form-group input[type="password"]:hover,
+.form-group input[type="number"]:hover,
+.form-group input[type="tel"]:hover,
+.form-group textarea:hover,
+.form-group select:hover {
+    border-color: var(--input-hover-border-color);
+}
+
+/* Input focus state */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--input-focus-border-color);
+    box-shadow: var(--input-focus-shadow);
+}
+
+/* Input error state */
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+    border-color: var(--input-error-border-color);
+}
+
+.form-group input.error:focus,
+.form-group textarea.error:focus,
+.form-group select.error:focus {
+    border-color: var(--input-error-border-color);
+    box-shadow: var(--input-error-shadow);
+}
+
+/* Error messages */
+.form-group .error-message {
+    color: var(--danger-bg-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Success state */
+.form-group input.success,
+.form-group textarea.success,
+.form-group select.success {
+    border-color: var(--success-bg-color);
+}
+
+.form-group input.success:focus,
+.form-group textarea.success:focus,
+.form-group select.success:focus {
+    border-color: var(--success-bg-color);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Placeholder styling */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* Select dropdown styling */
+.form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Textarea specific */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
