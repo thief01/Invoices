@@ -15,10 +15,6 @@ from companies.models import Company
 def get_companies(request):
     if request.method == "GET":
         companies =  Company.objects.filter(user = request.user)
-        # return JsonResponse({
-        #     'status': 'success',
-        #     'companies': list(companies.values('id', 'name', 'vat', 'tax_value', 'company_type'))
-        # })
         return render(request, 'companies/companies.html', {'companies': companies})
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
