@@ -8,11 +8,21 @@
     <link rel="stylesheet" href="{% static '/css/variables.css' %}">
     <link rel="stylesheet" href="{% static '/css/buttons.css' %}">
     <link rel="stylesheet" href="{% static '/css/companies/companies-list.css' %}">
+    <link rel="stylesheet" href="{% static '/css/messages.css' %}">
 </head>
 <body>
 <div>
     <h1 style="text-align: center">Twoje firmy</h1>
     <a href="{% url 'add_new_company' %}" class="btn btn-success">Dodaj nową firmę</a>
+    {% if messages %}
+    <div class="message">
+        <ul>
+            {% for message in messages %}
+                <li class="alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     <table>
         <thead>

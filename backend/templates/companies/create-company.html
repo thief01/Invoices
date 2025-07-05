@@ -5,8 +5,61 @@
     <title>Dodaj nową firmę</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/css/accounts/login.css' %}">
+    <link rel="stylesheet" href="{% static '/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static '/css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static '/css/forms.css' %}">
 </head>
 <body>
+<div>
+    <div class="box-view">
+        {% if form.errors %}
+            <div class="error">
+                <p>Wystąpiły błędy podczas tworzenia firmy:</p>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
+    <form method="post" action="{% url 'add_new_company' %}">
+        {% csrf_token %}
+        <h2>Dodaj nową firmę</h2>
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Nazwa firmy:</label>
+            {{ form.name }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.tin.id_for_label }}">NIP:</label>
+            {{ form.tin }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.vat.id_for_label }}">Płatnik VAT:</label>
+            {{ form.vat }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.tax_value.id_for_label }}">Wysokość podatku:</label>
+            {{ form.tax_value }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.company_type.id_for_label }}">Typ działaności:</label>
+            {{ form.company_type }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj firmę</button>
+    </form>
+    </div>
+</div>
 </body>
 </html>

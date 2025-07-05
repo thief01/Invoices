@@ -2,17 +2,21 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 
 from django.http import HttpResponse, JsonResponse
+from django.contrib import messages
 
+from companies.forms import CompanyForm
 from companies.models import Company
 
 @login_required
 def get_companies(request):
+    messages.success(request, 'Companies List')
+    companies = Company.objects.all()
     if request.method == "GET":
         companies =  Company.objects.filter(user = request.user)
         return render(request, 'companies/companies.html', {'companies': companies})
@@ -22,20 +26,17 @@ def get_companies(request):
 @login_required
 def add_new_company(request):
     if request.method == "POST":
-        company = Company()
-        data = json.loads(request.body)
-        company.name = data.get('name')
-        company.vat = data.get('vat')
-        company.tax_value = data.get('tax_value', 12)
-        company.company_type = data.get('company_type')
+        form = CompanyForm(request.POST)
+        if not form.is_valid():
+            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+        company = form.save(commit=False)
         company.user = request.user
-        try:
-            company.clean()
-            company.save()
-        except ValidationError as e:
-            return JsonResponse({'status': 'error', 'errors': e.message_dict}, status=400)
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'Method not allowed'}, status=405)
+        company.save()
+        messages.success(request, 'Company added successfully')
+        return redirect("get_companies")
+    else:
+        form = CompanyForm(initial={'user': request.user})
+    return render(request, 'companies/create-company.html', {'form': form})
 
 
 
