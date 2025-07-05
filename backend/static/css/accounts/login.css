@@ -9,13 +9,6 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.error
-{
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
-
 .form-group
 {
     margin-bottom: 15px;

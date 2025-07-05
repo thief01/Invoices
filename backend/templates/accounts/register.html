@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
     <link rel="stylesheet" href="{% static 'css/forms.css' %}">
     <link rel="stylesheet" href="{% static 'css/accounts/login.css' %}">
+    <link rel="stylesheet" href="{% static '/css/messages.css' %}">
 </head>
 <body>
 <div>
@@ -17,16 +18,19 @@
         <h2>Zarejestruj się</h2>
 
         {% if form.errors %}
-            <div class="error">
+            <div class="message">
                 <p>Wystąpiły błędy podczas rejestracji:</p>
                 <ul>
+                    {% for message in messages %}
+                        <li class="alert-{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
                     {% for field in form %}
                         {% for error in field.errors %}
-                            <li>{{ error }}</li>
+                            <li class="alert-error">{{ error }}</li>
                         {% endfor %}
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
+                        <li class="alert-error">{{ error }}</li>
                     {% endfor %}
                 </ul>
             </div>
