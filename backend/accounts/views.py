@@ -13,7 +13,6 @@ from django.views.decorators.http import require_POST
 
 
 def user_login(request):
-
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -31,11 +30,10 @@ def user_login(request):
 def user_logout(request):
     if request.method == "POST":
         logout(request)
-        return JsonResponse({'status': 'ok'})
+        return redirect('login')
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def user_register(request):
-
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static '/css/variables.css' %}">
     <link rel="stylesheet" href="{% static '/css/buttons.css' %}">
     <link rel="stylesheet" href="{% static '/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static '/css/messages.css' %}">
 </head>
 <body>
 <div>
@@ -58,6 +59,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Dodaj firmę</button>
+        <a href="{% url 'companies_list' %}" class="btn btn-danger">Anuluj</a>
     </form>
     </div>
 </div>

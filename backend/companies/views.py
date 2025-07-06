@@ -12,14 +12,16 @@ from django.contrib import messages
 
 from companies.forms import CompanyForm
 from companies.models import Company
+from invoices.models import CostInvoice, RevenueInvoice
+
 
 @login_required
-def get_companies(request):
+def companies_list(request):
     messages.success(request, 'Companies List')
     companies = Company.objects.all()
     if request.method == "GET":
         companies =  Company.objects.filter(user = request.user)
-        return render(request, 'companies/companies.html', {'companies': companies})
+        return render(request, 'companies/companies-list.html', {'companies': companies})
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
 
@@ -69,7 +71,15 @@ def delete_company(request):
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
 @login_required
-def company_detail(request, company_id):
+def company_details(request, company_id):
+    company = Company.objects.filter(id=company_id, user=request.user).first()
+    cost_invoices = CostInvoice.objects.filter(company = company)
+    revenue_invoices = RevenueInvoice.objects.filter(company = company)
+    if company:
+        return render(request, 'companies/company-details.html', {'company': company})
+    else:
+        messages.error(request, 'Company not found')
+        return redirect('get_companies')
     return JsonResponse({'status': 'Method not allowed'}, status=405)
 
 @login_required

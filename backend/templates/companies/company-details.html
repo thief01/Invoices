@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły firmy</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/css/accounts/login.css' %}">
+    <link rel="stylesheet" href="{% static '/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static '/css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static '/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static '/css/messages.css' %}">
+</head>
+<body>
+<div>
+    <div class="box-view">
+        <h2>Szczegóły firmy</h2>
+
+        {% if messages %}
+            <div class="message">
+                <ul>
+                    {% for message in messages %}
+                        <li class="alert-{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <table>
+            <tr>
+                <th>Nazwa firmy:</th>
+                <td>{{ company.name }}</td>
+            </tr>
+            <tr>
+                <th>NIP:</th>
+                <td>{{ company.tin }}</td>
+            </tr>
+            <tr>
+                <th>Płatnik VAT:</th>
+                <td>{{ company.vat|yesno:"Tak,Nie" }}</td>
+            </tr>
+            <tr>
+                <th>Wysokość podatku:</th>
+                <td>{{ company.tax_value }}%</td>
+            </tr>
+            <tr>
+                <th>Typ działalności:</th>
+                <td>{{ company.company_type }}</td>
+            </tr>
+        </table>
+    <br>
+
+        <a href="{% url 'edit_company' company.id %}" class="btn btn-primary">Edytuj</a>
+
+        <form method="post" action="{% url 'delete_company' company.id %}" style="display: inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Usuń</button>
+        </form>
+
+        <a href="{% url 'companies_list' %}" class="btn btn-secondary">Powrót do listy firm</a>
+
+    </div>
+</div>
+</body>
+</html>

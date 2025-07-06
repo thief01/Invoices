@@ -14,6 +14,8 @@
 <div>
     <h1 style="text-align: center">Twoje firmy</h1>
     <a href="{% url 'add_new_company' %}" class="btn btn-success">Dodaj nową firmę</a>
+    <a href="{% url 'index' %}" class="btn btn-secondary">Powrót do strony głównej</a>
+
     {% if messages %}
     <div class="message">
         <ul>
