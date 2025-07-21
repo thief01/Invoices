@@ -1,0 +1,57 @@
+# Django Core
+Django==5.0.1
+djangorestframework==3.14.0
+
+# Database
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+# mysqlclient==2.2.4    # MySQL adapter (uncomment if using MySQL)
+
+# Environment and Configuration
+python-decouple==3.8
+python-dotenv==1.0.0
+
+# Authentication and Security
+django-cors-headers==4.3.1
+django-allauth==0.57.0
+PyJWT==2.8.0
+
+# API Documentation
+drf-spectacular==0.27.1
+
+# File Handling
+Pillow==10.2.0
+django-storages==1.14.2
+boto3==1.34.34  # for AWS S3 integration
+
+# Caching
+redis==5.0.1
+django-redis==5.4.0
+
+# Task Queue
+celery==5.3.4
+
+# Development Tools
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
+
+# Testing
+pytest==7.4.4
+pytest-django==4.8.0
+factory-boy==3.3.0
+
+# Code Quality
+black==23.12.1
+flake8==7.0.0
+isort==5.13.2
+
+# Monitoring and Logging
+sentry-sdk==1.40.0
+
+# Utilities
+requests==2.31.0
+python-dateutil==2.8.2
+pytz==2023.4
+
+# Production Server
+gunicorn==21.2.0
+whitenoise==6.6.0  # for serving static files
