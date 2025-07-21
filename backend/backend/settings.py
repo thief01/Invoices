@@ -25,6 +25,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-for-dev")
 DEBUG = os.environ.get("DEBUG", 'False') == 'True'
 
 ALLOWED_HOSTS = [ "fakturki.mimigames.pl", "localhost", "0.0.0.0"]
+CSRF_TRUSTED_ORIGINS = [
+    'https://fakturki.mimigames.pl',
+    'https://www.fakturki.mimigames.pl',
+]
 
 
 # Application definition
