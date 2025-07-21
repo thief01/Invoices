@@ -1,3 +1,6 @@
+# Docker deployment test
+Invoices: https://fakturki.mimigames.pl/accounts/login/
+
 # Application for invoices
 - for now backend is rendering front-end because i decided this will be better for UX test
 - in future i want to make front-end app
